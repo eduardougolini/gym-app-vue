@@ -11,12 +11,15 @@
           </nb-item>
           <nb-item floatingLabel class="password-input">
             <nb-label>Senha</nb-label>
-            <nb-input />
+            <nb-input secureTextEntry />
           </nb-item>
       </nb-form>
 
       <view class="forgot-password-container">
-        <nb-text :style="{fontSize: 12, fontColor: '#333'}">Esqueci minha senha</nb-text>
+        <nb-text 
+          :style="{fontSize: 12, fontColor: '#333'}"
+          v-bind:onPress="() => this.props.navigation.navigate('ForgotPassword')"
+          >Esqueci minha senha</nb-text>
       </view>
 
       <view class="center-container">
@@ -51,11 +54,6 @@
       return {
         emailInput: '',
         passwordInput: ''
-      }
-    },
-    methods: {
-      createAccountLinkClick: function() {
-        this.navigation.navigate("SignUp");
       }
     }
   }

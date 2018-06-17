@@ -11,13 +11,15 @@ import { StackNavigator } from "vue-native-router";
 import { Root, VueNativeBase } from "native-base";
 import HomeComponent from './src/components/HomeComponent';
 import SignUpComponent from './src/components/SignUpComponent';
+import ForgotPasswordComponent from './src/components/ForgotPasswordComponent';
 
 Vue.use(VueNativeBase);
 
 const AppNavigation = StackNavigator(
   {
     Home: HomeComponent,
-    SignUp: SignUpComponent
+    SignUp: SignUpComponent,
+    ForgotPassword: ForgotPasswordComponent
   },
   {
     initialRouteName: 'Home',
