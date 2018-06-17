@@ -7,6 +7,9 @@
       </nb-view>
     </nb-header>
     <nb-tabs>
+      <nb-tab :heading="getRoutinesTabHeading()">
+        <routines-tab-component />
+      </nb-tab>
       <nb-tab :heading="getGraphicsTabHeading()">
         <graphics-tab-component />
       </nb-tab>
@@ -20,6 +23,7 @@
 <script>
 
 import userImage from "../assets/user.jpg";
+import RoutinesTabComponent from './RoutinesTabComponent';
 import GraphicsTabComponent from './GraphicsTabComponent';
 import NutritionTabComponent from './NutritionTabComponent';
 import React from 'react';
@@ -34,9 +38,17 @@ export default {
   },
   components: {
     GraphicsTabComponent,
-    NutritionTabComponent
+    NutritionTabComponent,
+    RoutinesTabComponent
   },
   methods: {
+    getRoutinesTabHeading: () => {
+      return (
+        <TabHeading>
+          <Icon name="bicycle" />
+        </TabHeading>
+      );
+    },
     getGraphicsTabHeading: () => {
       return (
         <TabHeading>
