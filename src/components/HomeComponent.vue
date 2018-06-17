@@ -33,7 +33,7 @@
     </nb-body>
 
     <nb-footer class="footer">
-      <nb-text>Criar nova conta</nb-text>
+      <nb-text v-bind:onPress="() => this.props.navigation.navigate('SignUp')">Criar nova conta</nb-text>
     </nb-footer>
   </nb-container>
 </template>
@@ -42,10 +42,20 @@
 
   export default {
     name: 'homeComponent',
+    props: {
+      navigation: {
+        type: Object
+      }
+    },
     data: () => {
       return {
         emailInput: '',
         passwordInput: ''
+      }
+    },
+    methods: {
+      createAccountLinkClick: function() {
+        this.navigation.navigate("SignUp");
       }
     }
   }
@@ -54,7 +64,6 @@
 
 <style>
 .container {
-  /* background-image: '../assets/Homebackground.jpg'; */
   align-items: center;
   justify-content: center;
   flex: 1;
@@ -73,10 +82,6 @@
 
 .email-input,
 .password-input {
-  /* border-color: gray;
-  border-width: 1;
-  background-color: #fff;
-  height: 40px; */
   width: 80%;
 }
 
