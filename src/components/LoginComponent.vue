@@ -23,7 +23,8 @@
       </view>
 
       <view class="center-container">
-        <nb-button>
+        <nb-button
+        :onPress="() => this.props.navigation.navigate('Home')">
           <nb-text>Login</nb-text>
         </nb-button>
       </view>
@@ -44,7 +45,7 @@
 <script>
 
   export default {
-    name: 'homeComponent',
+    name: 'loginComponent',
     props: {
       navigation: {
         type: Object
