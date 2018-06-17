@@ -16,10 +16,14 @@
       </nb-form>
 
       <view class="forgot-password-container">
-        <nb-text 
-          :style="{fontSize: 12, fontColor: '#333'}"
-          v-bind:onPress="() => this.props.navigation.navigate('ForgotPassword')"
-          >Esqueci minha senha</nb-text>
+        <nb-button
+          transparent
+          :onPress="() => this.props.navigation.navigate('ForgotPassword')"
+          >
+          <nb-text 
+            :style="{fontSize: 12, fontColor: '#333'}"
+            >Esqueci minha senha</nb-text>
+        </nb-button>
       </view>
 
       <view class="center-container">
@@ -37,7 +41,11 @@
     </nb-body>
 
     <nb-footer class="footer">
-      <nb-text v-bind:onPress="() => this.props.navigation.navigate('SignUp')">Criar nova conta</nb-text>
+      <nb-button
+        transparent
+        :onPress="() => this.props.navigation.navigate('SignUp')">
+          <nb-text>Criar nova conta</nb-text>
+        </nb-button>
     </nb-footer>
   </nb-container>
 </template>
@@ -82,10 +90,6 @@
 .email-input,
 .password-input {
   width: 80%;
-}
-
-.forgot-password-container {
-  margin-top: 20px;  
 }
 
 .center-container {
