@@ -33,6 +33,7 @@
                 class="progress"></nb-row>
             </nb-view>
         </nb-body>
+
         <nb-footer class="footer">
             <nb-button
                  transparent
@@ -73,11 +74,13 @@ export default {
   width: 80%;
   height: 20px;
   background-color: gray;
+  border-radius: 20px;
 }
 
 .progress {
   background-color: blue;
   height: 20px;
   position: absolute;
+  border-radius: 20px;
 }
 </style>
