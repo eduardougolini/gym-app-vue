@@ -1,11 +1,11 @@
 <template>
   <nb-container>
-    <nb-header class="header">
+    <imageBackground class="header" :source="dumbbellImage" :style="{width: '100%', resizeMode: 'cover'}">
       <nb-view :style="{ flex: 1, alignItems: 'center' }">
         <nb-thumbnail large :source="userImage" />
-        <nb-text :style="{ marginTop: 20 }">Você está a X dias sem treinar</nb-text>
+        <nb-text :style="{ marginTop: 20, color: 'white' }">Você está a X dias sem treinar</nb-text>
       </nb-view>
-    </nb-header>
+    </imageBackground>
     <nb-tabs>
       <nb-tab :heading="getRoutinesTabHeading()">
         <routines-tab-component />
@@ -23,6 +23,7 @@
 <script>
 
 import userImage from "../assets/user.jpg";
+import dumbbellImage from "../assets/background.jpg";
 import RoutinesTabComponent from './RoutinesTabComponent';
 import GraphicsTabComponent from './GraphicsTabComponent';
 import NutritionTabComponent from './NutritionTabComponent';
@@ -33,7 +34,8 @@ export default {
   name: 'homeComponent',
   data: () => {
     return {
-      userImage: userImage
+      userImage: userImage,
+      dumbbellImage: dumbbellImage
     }
   },
   components: {
@@ -70,5 +72,6 @@ export default {
 <style scoped>
   .header {
     height: 170px;
+    padding-top: 10px;
   }
 </style>
