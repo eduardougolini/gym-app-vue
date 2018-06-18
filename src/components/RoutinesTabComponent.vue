@@ -10,16 +10,14 @@
                     </nb-left>
                 </nb-card-item> 
 
-                <nb-card-item cardBody>
+                <nb-card-item cardBody class="card">
                     <image :source="cardImage" class="card-item-image"/>
-                    <nb-body :style="{width: '100%'}">
-                      <nb-view class="background">
-                          <nb-row
-                             v-bind:width="fatProgress"
-                              class="progress"></nb-row>
-                      </nb-view>
-                    </nb-body>
                 </nb-card-item>
+                <nb-view class="background">
+                    <nb-row
+                        v-bind:width="firstRoutine"
+                        class="progress"></nb-row>
+                </nb-view>
             </nb-card>
         </nb-content>
       </nb-container>
@@ -31,15 +29,21 @@
   height: 100;
 }
 
+.card {
+  position: relative;
+}
+
 .background {
-  width: 50%;
-  height: 20;
+  width: 100%;
+  height: 10;
   background-color: gray;
+  position: absolute;
+  bottom: 0;
 }
 
 .progress {
   background-color: blue;
-  height: 20;
+  height: 10;
   position: absolute;
 }
 </style>    
@@ -50,7 +54,7 @@ export default {
   name: "routinesTabComponent",
   data: function() {
     return {
-      fatProgress: "45%",
+      firstRoutine: "45%",
       cardImage,
       stylesObj: {
         cardItemImage: {
