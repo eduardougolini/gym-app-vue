@@ -84,7 +84,7 @@
 .footer {
   border-color: transparent;
   background-color: transparent;
-  height: 35px;
+  height: 40px;
 }
 
 .email-input,
@@ -101,8 +101,8 @@
 }
 
 .icon {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 </style>
