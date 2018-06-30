@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "expo": "^27.0.1",
-    "native-base": "git+https://github.com/GeekyAnts/NativeBase.git#v2.4.2-2",
+    "native-base": "^2.6.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "vue-native-core": "0.0.6",
