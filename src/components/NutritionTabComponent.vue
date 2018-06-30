@@ -37,7 +37,7 @@
         <nb-footer class="footer">
             <nb-button
                  transparent
-                :onPress="() => this.props.navigation.navigate('AddMeal')">
+                :onPress="showOptions">
                 <nb-text>Adicionar Refeição</nb-text>
             </nb-button>
          </nb-footer>
@@ -45,14 +45,32 @@
 </template>
 
 <script>
+import { ActionSheet } from "native-base";
+
 export default {
   name: "nutritionTabComponent",
   data() {
     return {
       carbsProgress: "15%",
       proteinProgress: "30%",
-      fatProgress: "45%"
+      fatProgress: "45%",
+      mealOptions: ["Café da manhã", "Almoço", "Janta", "Lanches", "Cancelar"],
+      optionCancelIndex: 4,
+      clicked: 0
     };
+  },
+  methods: {
+      showOptions: function() {
+            ActionSheet.show({
+                options: this.mealOptions,
+                cancelButtonIndex: this.optionCancelIndex,
+                title: "Selecione uma opção"
+            },
+            buttonIndex => {
+                this.clicked = this.mealOptions[buttonIndex];
+            }
+          );
+      }
   }
 };
 </script>
