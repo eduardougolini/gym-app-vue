@@ -9,12 +9,12 @@
     <nb-form>
       <nb-item floatingLabel class="email-input">
         <nb-label>E-mail</nb-label>
-        <nb-input />
+        <nb-input keyboardType="email-address" />
       </nb-item>
     </nb-form>
 
     <nb-body :style="{marginTop: 20}">
-      <nb-button>
+      <nb-button :onPress="resetPassword">
         <nb-text>
           Recuperar
         </nb-text>
@@ -24,8 +24,31 @@
 </template>
 
 <script>
+
+import { Alert } from 'react-native';
+
 export default {
-  name: 'forgotPasswordComponent'
+  name: 'forgotPasswordComponent',
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data: () => {
+    email: ''
+  },
+  methods: {
+    resetPassword: function() {
+      Alert.alert(
+          'Sucesso',
+          'Em alguns instantes você receberá um e-mail com as instruções para a recuperação da sua senha',
+          [
+            {text: 'OK', onPress: () => this.navigation.goBack()},
+          ],
+          { cancelable: false }
+        );
+    }
+  }
 }
 </script>
 
