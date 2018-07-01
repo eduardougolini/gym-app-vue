@@ -42,44 +42,18 @@
                         </nb-view>
                     </nb-card>
                 </nb-col>
+                <nb-col></nb-col>
             </nb-grid>
         </nb-content>
       </nb-container>
 </template>
-
-<style>
-.card-item-image {
-  width: 120;
-  height: 100;
-}
-
-.card {
-  position: relative;
-}
-
-.background {
-  width: 100%;
-  height: 10;
-  background-color: gray;
-  position: absolute;
-  bottom: 0;
-  border-radius: 2px;
-}
-
-.progress {
-  background-color: blue;
-  height: 10;
-  position: absolute;
-  border-radius: 2px;
-}
-</style>    
 
 <script>
 import cardImage from "../assets/arm-routine.jpg";
 import cardImage2 from "../assets/leg-routine.jpg";
 export default {
   name: "routinesTabComponent",
-  data: function() {
+  data: () => {
     return {
       firstRoutine: "45%",
       secondRoutine: "75%",
@@ -94,3 +68,30 @@ export default {
   }
 };
 </script>
+
+<style>
+    .card-item-image {
+        width: 120;
+        height: 100;
+    }
+
+    .card {
+        position: relative;
+    }
+
+    .background {
+        width: 100%;
+        height: 10;
+        background-color: gray;
+        position: absolute;
+        bottom: 0;
+        border-radius: 2px;
+    }
+
+    .progress {
+        background-color: blue;
+        height: 10;
+        position: absolute;
+        border-radius: 2px;
+    }
+</style>    
