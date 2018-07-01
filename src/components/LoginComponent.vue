@@ -7,11 +7,11 @@
       <nb-form>
           <nb-item floatingLabel class="email-input">
             <nb-label>E-mail</nb-label>
-            <nb-input />
+            <nb-input v-model="credentials.email" autoCapitalize="none" keyboardType="email-address" />
           </nb-item>
           <nb-item floatingLabel class="password-input">
             <nb-label>Senha</nb-label>
-            <nb-input secureTextEntry />
+            <nb-input v-model="credentials.password" autoCapitalize="none" secureTextEntry />
           </nb-item>
       </nb-form>
 
@@ -28,7 +28,7 @@
 
       <view class="center-container">
         <nb-button
-        :onPress="() => this.props.navigation.navigate('Home')">
+        :onPress="loginAction">
           <nb-text>Login</nb-text>
         </nb-button>
       </view>
@@ -52,20 +52,50 @@
  
 <script>
 
-  export default {
-    name: 'loginComponent',
-    props: {
-      navigation: {
-        type: Object
-      }
-    },
-    data: () => {
-      return {
-        emailInput: '',
-        passwordInput: ''
+import { Alert } from 'react-native';
+
+export default {
+  name: 'loginComponent',
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data: () => {
+    return {
+      credentials: {
+        email: '',
+        password: ''
       }
     }
+  },
+  methods: {
+    loginAction: function() {
+      fetch('http://192.168.5.113:3000/login', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.credentials)
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.navigation.navigate('Home')
+      }).catch((error) => {
+        console.log(error)
+        Alert.alert(
+          'Falha',
+          'Credenciais inválidas',
+          [
+            {text: 'OK'}
+          ],
+          { cancelable: false }
+        );
+      });
+
+    }
   }
+}
 </script>
 
 

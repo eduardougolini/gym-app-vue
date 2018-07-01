@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     registerUser: function() {
-      console.log(this.userData)
       fetch('http://192.168.5.113:3000/register', {
         method: 'POST',
         headers: {
@@ -74,7 +73,7 @@ export default {
         );
       }).catch((error) => {
         console.log(error);
-      });;
+      });
     }
   }
 }
