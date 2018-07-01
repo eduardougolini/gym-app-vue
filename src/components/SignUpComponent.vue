@@ -14,7 +14,7 @@
           <nb-input v-model="password" />
         </nb-item>
         <nb-body class="signup-button-block">
-          <nb-button>
+          <nb-button :onPress="registerUser">
             <nb-text>Cadastrar</nb-text>
           </nb-button>
         </nb-body>
@@ -29,7 +29,28 @@ export default {
     return {
       name: '',
       email: '',
-      password: '',
+      password: ''
+    }
+  },
+  methods: {
+    registerUser: function() {
+      fetch('http://192.168.5.113:3000/register', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+      }).catch((error) => {
+        console.log(error);
+      });;
     }
   }
 }
