@@ -4,7 +4,7 @@
             <nb-grid>
                 <nb-col>
                     <nb-card :style="{width: 120, height: 150}" >
-                        <nb-card-item>
+                        <nb-card-item button :onPress="() => {console.log('clicou')}">
                             <nb-left>
                                 <nb-body>
                                     <nb-text>Rotina 1</nb-text>
@@ -12,7 +12,7 @@
                             </nb-left>
                         </nb-card-item> 
 
-                        <nb-card-item cardBody class="card">
+                        <nb-card-item cardBody class="card" button :onPress="() => {console.log('clicou')}">
                             <image :source="cardImage" class="card-item-image"/>
                         </nb-card-item>
                         <nb-view class="background">
@@ -24,7 +24,7 @@
                 </nb-col>
                 <nb-col>
                     <nb-card :style="{width: 120, height: 150}">
-                        <nb-card-item>
+                        <nb-card-item button :onPress="() => {console.log('clicou')}">
                             <nb-left>
                                 <nb-body>
                                     <nb-text>Rotina 2</nb-text>
@@ -32,7 +32,7 @@
                             </nb-left>
                         </nb-card-item> 
 
-                        <nb-card-item cardBody class="card">
+                        <nb-card-item cardBody class="card" button :onPress="() => {console.log('clicou')}">
                             <image :source="cardImage2" class="card-item-image"/>
                         </nb-card-item>
                         <nb-view class="background">
