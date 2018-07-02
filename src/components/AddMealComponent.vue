@@ -66,8 +66,8 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(this.meal)
-      }).then((response) => response.json())
-      .then((responseJson) => {
+      }).then(() => {
+        this.navigation.goBack();
       }).catch((error) => {
         Alert.alert(
           'Falha',

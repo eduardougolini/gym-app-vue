@@ -1,6 +1,6 @@
 <template>
     <nb-container>
-        <nb-text class="calories-counter">Calorias Restantes: {{ tdee | formatNumber }}</nb-text>
+        <nb-text class="calories-counter">Calorias Restantes: {{ neededCalories | formatNumber }}</nb-text>
         <nb-view :style="{marginLeft: '10%'}">
         <nb-label>Carboidratos</nb-label>
         </nb-view>
@@ -13,12 +13,12 @@
         </nb-body>
 
         <nb-view :style="{marginLeft: '10%'}">
-        <nb-label>Proteinas</nb-label>
+        <nb-label>Proteínas</nb-label>
         </nb-view>
         <nb-body :style="{width: '100%'}">
             <nb-view class="background">
             <nb-row
-                v-bind:width="proteinProgress"
+                v-bind:width="proteinsProgress"
                 class="progress"></nb-row>
             </nb-view>
         </nb-body>
@@ -29,7 +29,7 @@
         <nb-body :style="{width: '100%'}">
             <nb-view class="background">
             <nb-row
-                v-bind:width="fatProgress"
+                v-bind:width="fatsProgress"
                 class="progress"></nb-row>
             </nb-view>
         </nb-body>
@@ -59,10 +59,11 @@ export default {
     return {
       userData: {},
       tdee: 0,
+      neededCalories: 0,
       nowDate: '',
-      carbsProgress: "15%",
-      proteinProgress: "30%",
-      fatProgress: "45%",
+      carbsProgress: "0%",
+      proteinsProgress: "0%",
+      fatsProgress: "0%",
       mealOptions: ["Café da manhã", "Almoço", "Janta", "Lanches", "Cancelar"],
       optionCancelIndex: 4,
       clicked: 0
@@ -72,7 +73,8 @@ export default {
     let date = new Date();
     this.nowDate = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDay()}`;
     this.userData = Store.getters["User/getUserData"];
-    this.tdee = ((this.userData['height'] * 6.25) + (this.userData['weight'] * 9.99) - (this.userData['age'] * 4.92) + 5) * 1.55;
+    this.tdee = this.neededCalories = ((this.userData['height'] * 6.25) + (this.userData['weight'] * 9.99) - (this.userData['age'] * 4.92) + 5) * 1.55;
+    this.loadMeals();
   },
   methods: {
     showOptions: function() {
@@ -84,6 +86,48 @@ export default {
       buttonIndex => {
         this.clicked = buttonIndex;
       });
+    },
+    loadMeals: function() {
+      fetch(`http://192.168.5.113:3000/getMeals?user=${encodeURIComponent(this.userData._id)}&date=${encodeURIComponent(this.nowDate)}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.calculateNeededCalories(responseJson);
+      }).catch((error) => {
+        console.log(error);
+        Alert.alert(
+          'Falha',
+          'Falha ao receber as refeições',
+          [
+            {text: 'OK'}
+          ],
+          { cancelable: false }
+        );
+      });
+    },
+    calculateNeededCalories(meals) {
+      const neededCarbPercent = 50;
+      const neededProteinPercent = 20;
+      const neededFatPercent = 30;
+      let fat = 0;
+      let protein = 0;
+      let carb = 0;
+
+      for(meal of meals) {
+        fat += meal.fats;
+        protein += meal.proteins;
+        carb += meal.carbs;
+      }
+
+      this.carbsProgress = ((carb * 4 * 100) / (this.tdee * neededCarbPercent / 100)) + '%';
+      this.proteinsProgress = ((protein * 4 * 100) / (this.tdee * neededProteinPercent / 100)) + '%';
+      this.fatsProgress = ((fat * 9 * 100) / (this.tdee * neededFatPercent / 100)) + '%';
+
+      this.neededCalories = this.tdee - (carb * 4) - (protein * 4) - (fat * 9);
     }
   },
   watch: {
