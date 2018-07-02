@@ -1,6 +1,6 @@
 <template>
   <nb-container class="container">
-    <nb-h3 class="title">Adicionando {{ mealType }}</nb-h3>
+    <nb-h3 class="title">Adicionando {{ meal.type }}</nb-h3>
     <nb-form>
         <nb-item floatingLabel class="fat-input">
           <nb-label>Gorduras(g)</nb-label>
@@ -17,7 +17,7 @@
         <nb-body class="body">
           <view class="center-container">
             <nb-button
-              :onPress="loginAction">
+              :onPress="addMeal">
               <nb-text>Adicionar</nb-text>
             </nb-button>
           </view>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import Store from '../store/index';
+
 export default {
   name: 'addMealComponent',
   props: {
@@ -36,16 +38,46 @@ export default {
   },
   data() {
     return {
-      mealType: '',
+      userData: {},
       meal: {
+        user: '',
         fats: 0,
         carbs: 0,
-        proteins: 0
+        proteins: 0,
+        type: '',
+        date: ''
       }
     }
   },
   created() {
-    this.mealType = this.navigation.getParam('mealType');
+    let date = new Date();
+    this.userData = Store.getters["User/getUserData"];
+    this.meal.user = this.userData._id;
+    this.meal.type = this.navigation.getParam('mealType');
+    this.meal.date = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDay()}`;
+  }, 
+  methods: {
+    addMeal: function() {
+      fetch('http://192.168.5.113:3000/addMeal', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.meal)
+      }).then((response) => response.json())
+      .then((responseJson) => {
+      }).catch((error) => {
+        Alert.alert(
+          'Falha',
+          'Falha ao cadastrar refeição',
+          [
+            {text: 'OK'}
+          ],
+          { cancelable: false }
+        );
+      });
+    }
   }
 }
 </script>

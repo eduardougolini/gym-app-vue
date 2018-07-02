@@ -57,6 +57,7 @@ export default {
   },
   data() {
     return {
+      userData: {},
       tdee: 0,
       nowDate: '',
       carbsProgress: "15%",
