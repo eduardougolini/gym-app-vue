@@ -28,6 +28,7 @@
 
 <script>
 import Store from '../store/index';
+import { Alert } from 'react-native';
 
 export default {
   name: 'addMealComponent',
