@@ -38,7 +38,7 @@
             <nb-button
                  transparent
                 :onPress="showOptions">
-                <nb-text>Adicionar Refeição</nb-text>
+                <nb-icon class="icon" name="add-circle"></nb-icon><nb-text>Adicionar Refeição</nb-text>
             </nb-button>
          </nb-footer>
     </nb-container>
@@ -129,5 +129,9 @@ export default {
   height: 20px;
   position: absolute;
   border-radius: 20px;
+}
+
+.icon {
+  margin-right: 0px;
 }
 </style>
