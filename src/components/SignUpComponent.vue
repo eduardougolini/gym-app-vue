@@ -13,6 +13,10 @@
           <nb-label>Senha</nb-label>
           <nb-input v-model="userData.password" autoCapitalize="none" secureTextEntry/>
         </nb-item>
+        <nb-item floatingLabel class="age-input">
+          <nb-label>Idade</nb-label>
+          <nb-input v-model="userData.age" keyboardType="numeric"/>
+        </nb-item>
         <nb-item floatingLabel class="weight-input">
           <nb-label>Peso(kg)</nb-label>
           <nb-input v-model="userData.weight" keyboardType="numeric"/>
@@ -47,6 +51,7 @@ export default {
         name: '',
         email: '',
         password: '',
+        age: '',
         weight: '',
         height: ''
       }

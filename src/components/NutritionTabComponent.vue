@@ -1,6 +1,6 @@
 <template>
     <nb-container>
-        <nb-text class="calories-counter">Calorias Restantes: X</nb-text>
+        <nb-text class="calories-counter">Calorias Restantes: {{ tdee | formatNumber }}</nb-text>
         <nb-view :style="{marginLeft: '10%'}">
         <nb-label>Carboidratos</nb-label>
         </nb-view>
@@ -46,11 +46,14 @@
 
 <script>
 import { ActionSheet } from "native-base";
+import Store from '../store/index';
 
 export default {
   name: "nutritionTabComponent",
   data() {
     return {
+      tdee: 0,
+      nowDate: '',
       carbsProgress: "15%",
       proteinProgress: "30%",
       fatProgress: "45%",
@@ -59,18 +62,28 @@ export default {
       clicked: 0
     };
   },
+  beforeMount() {
+    let date = new Date();
+    this.nowDate = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDay()}`;
+    this.userData = Store.getters["User/getUserData"];
+    this.tdee = ((this.userData['height']*6.25) + (this.userData['weight'] * 9.99) - (this.userData['age'] * 4.92) + 5) * 1.55;
+  },
   methods: {
-      showOptions: function() {
-            ActionSheet.show({
-                options: this.mealOptions,
-                cancelButtonIndex: this.optionCancelIndex,
-                title: "Selecione uma opção"
-            },
-            buttonIndex => {
-                this.clicked = this.mealOptions[buttonIndex];
-            }
-          );
-      }
+    showOptions: function() {
+      ActionSheet.show({
+        options: this.mealOptions,
+        cancelButtonIndex: this.optionCancelIndex,
+        title: "Selecione uma opção"
+      },
+      buttonIndex => {
+        this.clicked = this.mealOptions[buttonIndex];
+      });
+    }
+  },
+  filters: {
+    formatNumber: (value) => {
+      return parseInt(value);
+    }
   }
 };
 </script>
