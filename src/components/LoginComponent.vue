@@ -52,7 +52,7 @@
  
 <script>
 
-import { Alert } from 'react-native';
+import Store from '../store/index';
 
 export default {
   name: 'loginComponent',
@@ -71,28 +71,10 @@ export default {
   },
   methods: {
     loginAction: function() {
-      fetch('http://192.168.5.113:3000/login', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.credentials)
-      }).then((response) => response.json())
-      .then((responseJson) => {
-        this.navigation.navigate('Home')
-      }).catch((error) => {
-        console.log(error)
-        Alert.alert(
-          'Falha',
-          'Credenciais inválidas',
-          [
-            {text: 'OK'}
-          ],
-          { cancelable: false }
-        );
+      Store.dispatch('User/loginAction', {
+        credentials: this.credentials, 
+        navigation: this.navigation
       });
-
     }
   }
 }

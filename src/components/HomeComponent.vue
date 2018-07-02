@@ -3,7 +3,7 @@
     <imageBackground class="header" :source="dumbbellImage" :style="{width: '100%', resizeMode: 'cover'}">
       <nb-view :style="{ flex: 1, alignItems: 'center' }">
         <nb-thumbnail large :source="userImage" />
-        <nb-text :style="{ marginTop: 20, color: 'white' }">Você está a X dias sem treinar</nb-text>
+        <nb-text :style="{ marginTop: 20, color: 'white' }">Você está a {{ userData.daysWithoutTraining }} dias sem treinar</nb-text>
       </nb-view>
     </imageBackground>
     <nb-tabs>
@@ -29,11 +29,13 @@ import GraphicsTabComponent from './GraphicsTabComponent';
 import NutritionTabComponent from './NutritionTabComponent';
 import React from 'react';
 import { TabHeading, Icon, Text } from 'native-base';
+import Store from '../store/index';
 
 export default {
   name: 'homeComponent',
   data: () => {
     return {
+      userData: {},
       userImage: userImage,
       dumbbellImage: dumbbellImage
     }
@@ -43,7 +45,13 @@ export default {
     NutritionTabComponent,
     RoutinesTabComponent
   },
+  beforeMount() {
+    this.loadUserData();
+  },
   methods: {
+    loadUserData: function() {
+      this.userData = Store.getters["User/getUserData"];
+    },
     getRoutinesTabHeading: () => {
       return (
         <TabHeading>
