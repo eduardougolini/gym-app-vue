@@ -50,6 +50,11 @@ import Store from '../store/index';
 
 export default {
   name: "nutritionTabComponent",
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
   data() {
     return {
       tdee: 0,
@@ -66,7 +71,7 @@ export default {
     let date = new Date();
     this.nowDate = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDay()}`;
     this.userData = Store.getters["User/getUserData"];
-    this.tdee = ((this.userData['height']*6.25) + (this.userData['weight'] * 9.99) - (this.userData['age'] * 4.92) + 5) * 1.55;
+    this.tdee = ((this.userData['height'] * 6.25) + (this.userData['weight'] * 9.99) - (this.userData['age'] * 4.92) + 5) * 1.55;
   },
   methods: {
     showOptions: function() {
@@ -76,7 +81,18 @@ export default {
         title: "Selecione uma opção"
       },
       buttonIndex => {
-        this.clicked = this.mealOptions[buttonIndex];
+        this.clicked = buttonIndex;
+      });
+    }
+  },
+  watch: {
+    clicked(value) {
+      if (this.mealOptions[value] === undefined || value === this.optionCancelIndex) {
+        return;
+      }
+
+      this.navigation.navigate('AddMeal', {
+        'mealType': this.mealOptions[value]
       });
     }
   },

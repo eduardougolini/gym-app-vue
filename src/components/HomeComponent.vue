@@ -14,7 +14,7 @@
         <graphics-tab-component />
       </nb-tab>
       <nb-tab :heading="getNutritionTabHeading()">
-        <nutrition-tab-component />
+        <nutrition-tab-component :navigation="navigation"/>
       </nb-tab>
     </nb-tabs>
   </nb-container>
@@ -33,6 +33,11 @@ import Store from '../store/index';
 
 export default {
   name: 'homeComponent',
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
   data: () => {
     return {
       userData: {},
