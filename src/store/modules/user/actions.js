@@ -23,5 +23,8 @@ export default {
         { cancelable: false }
       );
     });
+  },
+  updateUserData: ({commit}, userData) => {
+    commit('SET_USER_DATA', userData );
   }
 }

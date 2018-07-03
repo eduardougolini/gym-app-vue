@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
   .header {
-    height: 170px;
+    height: 180px;
     padding-top: 10px;
   }
 </style>

@@ -53,7 +53,8 @@ const AppNavigation = StackNavigator(
     RoutineData: RoutineDataComponent
   },
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Login',
+    headerMode: "none"
   }
 );
 
