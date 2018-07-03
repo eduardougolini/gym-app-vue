@@ -5,6 +5,9 @@
           v-for="exercise in exercisesList"
           :key="exercise.title"
           button
+          :onPress="() => this.props.navigation.navigate('RoutineData', {
+            exercise
+          })"
       >
         <nb-left>
           <nb-text>
