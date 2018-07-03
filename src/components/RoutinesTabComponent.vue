@@ -4,7 +4,7 @@
       <nb-grid>
         <nb-col>
           <nb-card :style="{width: 120, height: 150}" >
-            <nb-card-item button :onPress="() => {console.log('clicou')}">
+            <nb-card-item button :onPress="goToArmRoutine">
               <nb-left>
                 <nb-body>
                   <nb-text>Rotina 1</nb-text>
@@ -12,7 +12,7 @@
               </nb-left>
             </nb-card-item> 
 
-            <nb-card-item cardBody class="card" button :onPress="() => {console.log('clicou')}">
+            <nb-card-item cardBody class="card" button :onPress="goToArmRoutine">
               <image :source="cardImage" class="card-item-image"/>
             </nb-card-item>
             <nb-view class="background">
@@ -73,6 +73,11 @@ export default {
     }
   },
   methods: {
+    goToArmRoutine: function() {
+      this.navigation.navigate('Routine', {
+        'routine': 1
+      });
+    },
     goToLegsRoutine: function() {
       this.navigation.navigate('Routine', {
         'routine': 2
