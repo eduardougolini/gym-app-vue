@@ -1,6 +1,6 @@
 <template>
   <nb-container>
-    <nb-list>
+    <nb-list :style="{ marginTop: 15 }">
       <nb-list-item
           v-for="exercise in exercisesList"
           :key="exercise.title"
@@ -19,6 +19,16 @@
         </nb-right>
       </nb-list-item>
     </nb-list>
+    <nb-grid :style="{ marginTop: 40}">
+      <nb-row :style="{ marginLeft: '33%' }">
+        <nb-button 
+          dark 
+          :style="{ marginLeft: 15}"
+          :onPress="() => { this.props.navigation.navigate('Drawer') }">
+          <nb-text>Voltar</nb-text>
+        </nb-button>
+      </nb-row>
+    </nb-grid>
   </nb-container>
 </template>
 

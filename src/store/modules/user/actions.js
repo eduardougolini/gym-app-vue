@@ -2,6 +2,7 @@ import { Alert } from 'react-native'
 
 export default {
   loginAction: ({commit}, {credentials, navigation}) => {
+    console.log(credentials);
     fetch('http://192.168.5.113:3000/login', {
       method: 'POST',
       headers: {
@@ -14,6 +15,7 @@ export default {
       commit('SET_USER_DATA', responseJson );
       navigation.navigate('Drawer');
     }).catch((error) => {
+      console.log(error);
       Alert.alert(
         'Falha',
         'Credenciais inválidas',

@@ -5,6 +5,16 @@
       <nb-text class='content'>{{exercise.content}}</nb-text>
       <nb-text>Seu objetivo aqui é fazer {{exercise.sessions}} sessões de {{exercise.repetitions}} repetições</nb-text>
     </nb-body>
+    <nb-grid :style="{ marginTop: 40}">
+      <nb-row :style="{ marginLeft: '33%' }">
+        <nb-button 
+          dark 
+          :style="{ marginLeft: 15}"
+          :onPress="() => { this.props.navigation.navigate('Routine') }">
+          <nb-text>Voltar</nb-text>
+        </nb-button>
+      </nb-row>
+    </nb-grid>
   </nb-container>
 </template>
 

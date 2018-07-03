@@ -2,26 +2,32 @@
   <nb-container class="container">
     <nb-h3 class="title">Adicionando {{ meal.type }}</nb-h3>
     <nb-form>
-        <nb-item floatingLabel class="fat-input">
-          <nb-label>Gorduras(g)</nb-label>
-          <nb-input v-model="meal.fats" keyboardType="numeric" />
-        </nb-item>
-        <nb-item floatingLabel class="carb-input">
-          <nb-label>Carboidratos(g)</nb-label>
-          <nb-input v-model="meal.carbs" keyboardType="numeric" />
-        </nb-item>
-        <nb-item floatingLabel class="protein-input">
-          <nb-label>Proteínas(g)</nb-label>
-          <nb-input v-model="meal.proteins" keyboardType="numeric" />
-        </nb-item>
-        <nb-body class="body">
-          <view class="center-container">
-            <nb-button
-              :onPress="addMeal">
-              <nb-text>Adicionar</nb-text>
-            </nb-button>
-          </view>
-        </nb-body>
+      <nb-item floatingLabel class="fat-input">
+        <nb-label>Gorduras(g)</nb-label>
+        <nb-input v-model="meal.fats" keyboardType="numeric" />
+      </nb-item>
+      <nb-item floatingLabel class="carb-input">
+        <nb-label>Carboidratos(g)</nb-label>
+        <nb-input v-model="meal.carbs" keyboardType="numeric" />
+      </nb-item>
+      <nb-item floatingLabel class="protein-input">
+        <nb-label>Proteínas(g)</nb-label>
+        <nb-input v-model="meal.proteins" keyboardType="numeric" />
+      </nb-item>
+      <nb-grid :style="{ marginTop: 40}">
+        <nb-row :style="{ marginLeft: '17%' }">
+          <nb-button
+            :onPress="addMeal">
+            <nb-text>Adicionar</nb-text>
+          </nb-button>
+          <nb-button 
+            dark 
+            :style="{ marginLeft: 15}"
+            :onPress="() => { this.props.navigation.navigate('Drawer') }">
+            <nb-text>Cancelar</nb-text>
+          </nb-button>
+        </nb-row>
+      </nb-grid>
     </nb-form>
   </nb-container>
 </template>
@@ -67,7 +73,7 @@ export default {
         },
         body: JSON.stringify(this.meal)
       }).then(() => {
-        this.navigation.goBack();
+        this.navigation.navigate("Drawer");
       }).catch((error) => {
         Alert.alert(
           'Falha',
@@ -92,7 +98,7 @@ export default {
 }
 
 .title {
-  margin-top: 15%;
+  margin-top: 25%;
 }
 
 .body {

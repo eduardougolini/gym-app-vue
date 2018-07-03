@@ -11,7 +11,7 @@
           </nb-item>
           <nb-item floatingLabel class="password-input">
             <nb-label>Senha</nb-label>
-            <nb-input v-model="credentials.password" autoCapitalize="none" secureTextEntry />
+            <nb-input autoCapitalize="none" secureTextEntry :onChangeText="text => credentials.password = text"/>
           </nb-item>
       </nb-form>
 
