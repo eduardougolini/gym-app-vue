@@ -1,9 +1,15 @@
 <template>
   <nb-container>
     <imageBackground class="header" :source="dumbbellImage" :style="{width: '100%', resizeMode: 'cover'}">
+      <nb-button 
+        transparent 
+        :style="{ marginLeft: 5 }"
+        :onPress="() => { this.props.navigation.navigate('DrawerOpen') }">
+        <nb-icon name="menu" :style="{ color: 'white' }" />
+      </nb-button>
       <nb-view :style="{ flex: 1, alignItems: 'center' }">
         <nb-thumbnail large :source="userImage" />
-        <nb-text :style="{ marginTop: 20, color: 'white' }">Você está a {{ userData.daysWithoutTraining }} dias sem treinar</nb-text>
+        <nb-text :style="{ marginTop: 10, color: 'white' }">Você está a {{ userData.daysWithoutTraining }} dias sem treinar</nb-text>
       </nb-view>
     </imageBackground>
     <nb-tabs>

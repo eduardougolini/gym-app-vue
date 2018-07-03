@@ -7,7 +7,8 @@
 <script>
 
 import Vue from "vue-native-core";
-import { StackNavigator } from "vue-native-router";
+import React from "react";
+import { StackNavigator, DrawerNavigator } from "vue-native-router";
 import { Root, VueNativeBase } from "native-base";
 import LoginComponent from './src/components/LoginComponent';
 import HomeComponent from './src/components/HomeComponent';
@@ -16,11 +17,33 @@ import ForgotPasswordComponent from './src/components/ForgotPasswordComponent';
 import AddMealComponent from './src/components/AddMealComponent';
 import RoutineComponent from './src/components/RoutineComponent';
 import RoutineDataComponent from './src/components/RoutineDataComponent';
+import SideBarComponent from './src/components/SideBarComponent';
+import ConfigComponent from './src/components/ConfigComponent';
 
 Vue.use(VueNativeBase);
 
+const Drawer = DrawerNavigator({
+  Config: ConfigComponent,
+  Login: LoginComponent,
+  Home: HomeComponent,
+  SignUp: SignUpComponent,
+  ForgotPassword: ForgotPasswordComponent,
+  AddMeal: AddMealComponent,
+  Routine: RoutineComponent,
+  RoutineData: RoutineDataComponent
+}, {
+  initialRouteName: "Home",
+  contentOptions: {
+    activeTintColor: "#e91e63"
+  }, 
+  contentComponent: props => {
+    return <SideBarComponent {...props} />;
+  }
+});
+
 const AppNavigation = StackNavigator(
   {
+    Drawer: Drawer,
     Login: LoginComponent,
     Home: HomeComponent,
     SignUp: SignUpComponent,
@@ -30,9 +53,10 @@ const AppNavigation = StackNavigator(
     RoutineData: RoutineDataComponent
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Login'
   }
 );
+
 
 export default {
   components: { 

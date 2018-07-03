@@ -12,7 +12,7 @@ export default {
     }).then((response) => response.json())
     .then((responseJson) => {
       commit('SET_USER_DATA', responseJson );
-      navigation.navigate('Home')
+      navigation.navigate('Drawer');
     }).catch((error) => {
       Alert.alert(
         'Falha',
