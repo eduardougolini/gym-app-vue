@@ -8,7 +8,7 @@
     </imageBackground>
     <nb-tabs>
       <nb-tab :heading="getRoutinesTabHeading()">
-        <routines-tab-component />
+        <routines-tab-component :navigation="navigation"/>
       </nb-tab>
       <nb-tab :heading="getGraphicsTabHeading()">
         <graphics-tab-component />

@@ -14,6 +14,7 @@ import HomeComponent from './src/components/HomeComponent';
 import SignUpComponent from './src/components/SignUpComponent';
 import ForgotPasswordComponent from './src/components/ForgotPasswordComponent';
 import AddMealComponent from './src/components/AddMealComponent';
+import RoutineComponent from './src/components/RoutineComponent';
 
 Vue.use(VueNativeBase);
 
@@ -23,7 +24,8 @@ const AppNavigation = StackNavigator(
     Home: HomeComponent,
     SignUp: SignUpComponent,
     ForgotPassword: ForgotPasswordComponent,
-    AddMeal: AddMealComponent
+    AddMeal: AddMealComponent,
+    Routine: RoutineComponent
   },
   {
     initialRouteName: 'Login',
